@@ -1,0 +1,2 @@
+def likes(names):
+    return f"{'no one' if len(names) == 0 else names[0] if len(names) == 1 else names[0] + ' and ' + names[1] if len(names) == 2 else names[0] + ', ' + names[1] + ' and ' + names[2] if len(names) == 3 else names[0] + ', ' + names[1] + ' and ' + str(len(names)-2) + 'others'} {'likes' if len(names) < 2 else 'like'} this"
