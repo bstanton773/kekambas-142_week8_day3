@@ -2,7 +2,7 @@
 /*
 To run TypeScript code it first must be compile with the TypeScript compiler - tsc
 we can run tsc and a ts file name and it will convert that file to a js file
-if se set the rootDir of our project to a folder of TS files running tsc
+if we set the rootDir of our project to a folder of TS files running tsc
 will compile all the files into JS files.
 
 To run these files on node we can simply run node FILENAME.js
@@ -31,6 +31,7 @@ to the "scripts" section
 
 Note this will run any code executed in index.ts but not other .ts files.
 */
+Object.defineProperty(exports, "__esModule", { value: true });
 /*
 Note: What is and isn't included by default and in strict mode
 can change from release to release
@@ -75,7 +76,7 @@ When enabled, the compiler will check all code paths in a function to ensure the
 //     if (age>10){
 //         return age
 //     }
-//     //return undefined is implicit here
+//     // return undefined // is implicit here
 // }    
 /*
 noUnusedLocals
@@ -84,7 +85,8 @@ Recommended:true
 When enabled, the compiler will report unused local variables.
 */
 // function doSomething(){
-//     let unused;
+//     let unused = 'This is unused';
+//     return 10 + 10
 // }
 /*
 noUnusedParameters
@@ -92,8 +94,9 @@ Default: false
 Recommended:true
 When enabled, the compiler will report unused parameters.
 */
-// function unUsedParam(param1:Event, param2:string){
-//     console.log(param2)
+// function unUsedParam(param1:number, param2:string){
+//     console.log(param2);
+//     console.log(param1);
 // }
 /*
 Sometime you want to ignore the parameter without turning off this compiler option
@@ -103,23 +106,29 @@ in to TypeScript
 // function unUsedParam2(_:Event, param2:string){
 //     console.log(param2)
 // }
+let colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
+function isEvenIndex(_, index) {
+    return index % 2 === 0;
+}
+let otherColors = colors.filter(isEvenIndex);
+console.log(otherColors);
 /*
 strictNullChecks
-Default: false
+Default: true
 Recommended: true
 
 When enabled, null and undefined will not be acceptable values for variables
 unless you explicitly declare them as nullable.
 So, you’ll get an error if you set a variable to null or undefined.
 */
-// function makeLowerCase(s:string){
-//     return s.toLowerCase()
-// }
-// makeLowerCase(null)
+const posts = [{ id: 1, title: 'First Post' }, { id: 2, title: 'Second Post' }];
+let postId = 1;
+let myPost = posts.find(p => p.id === postId);
+console.log(myPost === null || myPost === void 0 ? void 0 : myPost.title);
 /*
 allowUnreachableCode
 Default: true
-Recommended: true
+Recommended: false
 When set the false, reports error about unreachable code.
 */
 // function sipylus(fruits:string[]){
@@ -158,7 +167,7 @@ Default: false
 Recommended: Depends
 When enabled this will allow us to import JavaScript code in our TypeScript
 */
-// import {squareFootage} from './area';
+// import { squareFootage } from './area';
 // let myArea=squareFootage(4.,5)
 // console.log(myArea)
 /*
@@ -167,7 +176,7 @@ Default: false
 Recommended: Depends
 When enabled TS will try to type check our JS code
 */
-// import {squareFootage} from './area';
+// import { squareFootage } from './area';
 // let myArea2=squareFootage()
 // console.log(myArea2) //NaN
 /*
@@ -184,7 +193,7 @@ To TS our JS parameters are of any type, so this passes the type check
     with allowJs and checkJs enabled using the JS Doc
 */
 // import {squareFootageJD} from './area-js-doc';
-// // squareFootageJD();
+// squareFootageJD('10', 10);
 // squareFootageJD(2,3);
 /*
 
@@ -197,7 +206,7 @@ create the area.d.ts file now
 */
 //We now get error right away
 // import {squareFootage} from './area';
-// let myArea3=squareFootage("A","B")
+// let myArea3=squareFootage(10,20)
 // console.log(myArea3)
 /*
 Using Third Party JS Libraries
@@ -211,9 +220,9 @@ This package generates universally unique identifiers
 // Note the error Could not find a declaration file for module 'uuid'
 // To Fix this error the Definitely Typed Library contains
 // types for the common JS Libraries (Note: not all libraries)
-// to beable to use its types we can run 
+// to be able to use its types we can run 
 // npm install @types/uuid
 // Now the error has gone away
-// import { v4 as uuidv4 } from "uuid";
-// let uuid= uuidv4()
-// console.log(uuid)
+const uuid_1 = require("uuid");
+let uuid = (0, uuid_1.v4)();
+console.log(uuid);
